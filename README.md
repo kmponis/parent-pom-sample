@@ -7,7 +7,7 @@ A sample parent pom project, to manage the versions of the dependencies.
 ## Download
 * Open command line and move to your workspace.
 * Download project using your username: 
-<br>`> git clone https://gitlab.com/kmponis-examples/parent-pom-sample.git`
+<br>`> git clone https://github.com/kmponis/parent-pom-sample.git`
 * Go to project: 
 <br>`> cd /parent-pom-sample`
 
