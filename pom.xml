@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.parent.pom</groupId>
+	<artifactId>parent-pom-sample</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<name>parent-pom-sample</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<version.java>1.8</version.java>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<version.spring.boot>2.1.2.RELEASE</version.spring.boot>
+		<version.spring>5.1.4.RELEASE</version.spring>
+		<version.jackson>2.9.6</version.jackson>
+		<version.lombok>1.16.22</version.lombok>
+		<version.swagger>2.9.2</version.swagger>
+		<version.maven.war.plugin>3.2.2</version.maven.war.plugin>
+		<version.maven.compiler.plugin>3.8.0</version.maven.compiler.plugin>
+		<version.junit.jupiter>5.0.0-M5</version.junit.jupiter>
+		<version.jacoco>0.8.3</version.jacoco>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-rest</artifactId>
+				<version>${version.spring.boot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${version.spring.boot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+				<version>${version.spring.boot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				<version>${version.spring.boot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-mongodb</artifactId>
+				<version>${version.spring.boot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			<!-- Jackson XML -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${version.jackson}</version>
+			</dependency>
+			<!-- Lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${version.lombok}</version>
+			</dependency>
+			<!-- Swagger -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${version.swagger}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${version.swagger}</version>
+			</dependency>
+
+			<!-- ***************** -->
+			<!-- TEST Dependencies -->
+			<!-- ***************** -->
+			<!-- Spring -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${version.spring.boot}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- JUnit jupiter -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${version.junit.jupiter}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.maven.compiler.plugin}</version>
+					<configuration>
+						<source>${version.java}</source>
+						<target>${version.java}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifest>
+								<mainClass>${start-class}</mainClass>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.maven.war.plugin}</version>
+					<configuration>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${version.spring.boot}</version>
+					<executions>
+						<execution>
+							<id>repackage</id>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>${start-class}</mainClass>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${version.jacoco}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<!-- attached to Maven test phase -->
+						<execution>
+							<id>post-unit-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<!-- Sets the path to the file which contains the execution data. -->
+								<excludes>
+									<exclude>com/web/service/**/Home.class</exclude>
+									<exclude>com/web/service/**/model/*.class</exclude>
+								</excludes>
+								<dataFile>target/jacoco.exec</dataFile>
+								<!-- Sets the output directory for the code coverage report. -->
+								<outputDirectory>target/jacoco-reports</outputDirectory>
+							</configuration>
+						</execution>
+						<!-- For some reason index.html shows 100% but lines covered ratio 
+							is 0.3 -->
+						<!-- <execution> <id>jacoco-check</id> <goals> <goal>check</goal> </goals> 
+							<configuration> <rules> <rule> <element>PACKAGE</element> <limits> <limit> 
+							<counter>LINE</counter> <value>COVEREDRATIO</value> <minimum>0.9</minimum> 
+							</limit> </limits> </rule> </rules> </configuration> </execution> -->
+					</executions>
+					<configuration>
+						<systemPropertyVariables>
+							<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+						</systemPropertyVariables>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
