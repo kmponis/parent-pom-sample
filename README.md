@@ -18,8 +18,8 @@ A sample parent pom project, to manage the versions of the dependencies.
 
 ## Use
 * Add to maven dependencies:
-  <br>`<dependency>
-  <br>  <groupId>com.parent.pom</groupId>
-  <br>  <artifactId>parent-pom-sample</artifactId>
-  <br>  <version>1.0.0</version>
-  <br></dependency>`
+  <br>`<dependency>\
+  <groupId>com.parent.pom</groupId>\
+  <artifactId>parent-pom-sample</artifactId>\
+  <version>1.0.0</version>\
+  </dependency>`
