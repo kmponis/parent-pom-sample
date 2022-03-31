@@ -14,7 +14,7 @@
 		<version.java>1.8</version.java>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<version.spring.boot>2.1.2.RELEASE</version.spring.boot>
+		<version.spring.boot>2.5.12</version.spring.boot>
 		<version.spring>5.1.4.RELEASE</version.spring>
 		<version.jackson>[2.9.9,)</version.jackson>
 		<version.lombok>1.16.22</version.lombok>
