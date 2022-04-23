@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<version.spring.boot>2.1.2.RELEASE</version.spring.boot>
-		<version.spring>5.1.4.RELEASE</version.spring>
+		<version.spring>5.3.19</version.spring>
 		<version.jackson>[2.9.9,)</version.jackson>
 		<version.lombok>1.16.22</version.lombok>
 		<version.swagger>2.9.2</version.swagger>
